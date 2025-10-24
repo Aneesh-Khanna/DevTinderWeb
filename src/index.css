@@ -2,3 +2,14 @@
 @plugin "daisyui" {
   themes: dark, light;
 }
+
+.html {
+  padding: 0;
+  margin: 0;
+}
+
+.card-body:last-child,
+.card-actions:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
