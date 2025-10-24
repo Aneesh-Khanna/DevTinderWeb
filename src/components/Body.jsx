@@ -1,19 +1,23 @@
-import Header from './Header'
-import Footer from './Footer'
-import { Outlet } from 'react-router-dom'
+import Header from "./Header";
+import Footer from "./Footer";
+import { Outlet } from "react-router-dom";
 
 const Body = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-        <Header />
-        
-        <main className=".flex-grow">
-        <Outlet />
-        </main>
-        
-        <Footer />
-    </div>
-  )
-}
+    <div className="min-h-screen flex flex-col bg-base-100">
+      <Header />
 
-export default Body
+      {/* Main content */}
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+
+      {/* Footer always at bottom */}
+      <footer className="mt-auto">
+        <Footer />
+      </footer>
+    </div>
+  );
+};
+
+export default Body;

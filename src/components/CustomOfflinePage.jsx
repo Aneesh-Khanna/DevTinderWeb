@@ -3,7 +3,6 @@ const CustomOfflinePage = () => {
     <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white">
       {/* Phone-like container */}
       <div className="w-[340px] max-w-sm bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-6 text-center border border-white/20">
-        
         {/* Icon */}
         <div className="mb-4">
           <svg
@@ -23,7 +22,9 @@ const CustomOfflinePage = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-2xl font-semibold mb-2 tracking-wide">You're Offline</h1>
+        <h1 className="text-2xl font-semibold mb-2 tracking-wide">
+          You're Offline
+        </h1>
 
         {/* Message */}
         <p className="text-sm text-gray-300 mb-1">
