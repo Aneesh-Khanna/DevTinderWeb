@@ -6,6 +6,8 @@ import { Toaster, toast } from "react-hot-toast";
 import { Eye, EyeOff, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Login = () => {
   const dispatch = useDispatch(); // for redux store
@@ -14,6 +16,9 @@ const Login = () => {
   const [error, setError] = useState(""); // Error message display
   const [loading, setLoading] = useState(false); // Spinner state
   const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+
+  const user = useSelector((store) => store.user);
+  // to not enable logged in users to go to login page
 
   // Refs for form fields
   const firstNameRef = useRef();
@@ -61,14 +66,17 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       // ❌ Show error toast
-      const message =
-        err.response?.data?.message || "Something went wrong. Try again.";
+      const message = err?.response?.data || "Something went wrong. Try again.";
       setError(message);
       toast.error(message);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user]);
 
   return (
     <div className="h-screen flex flex-col bg-base-100 overflow-hidden mb-7">
