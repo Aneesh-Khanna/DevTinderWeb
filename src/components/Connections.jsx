@@ -3,6 +3,7 @@ import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/ReduxStore/connectionSlice";
+import ConnectionsShimmer from "../utils/ShimmerUI/ConnectionsShimmer";
 
 const Connections = () => {
   const connections = useSelector((store) => store.connections);
@@ -23,7 +24,7 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (!connections) return null;
+  if (!connections) return <ConnectionsShimmer />;
 
   if (connections.length === 0)
     return (

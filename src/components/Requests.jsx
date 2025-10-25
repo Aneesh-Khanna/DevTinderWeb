@@ -3,7 +3,8 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/ReduxStore/requestSlice";
 import { useEffect } from "react";
-import { toast, Toaster } from "react-hot-toast"; // ✅ Toast import
+import { toast, Toaster } from "react-hot-toast";
+import RequestsShimmer from "../utils/ShimmerUI/RequestsShimmer";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
@@ -50,7 +51,7 @@ const Requests = () => {
     }
   };
 
-  if (!requests) return null;
+  if (!requests) return <RequestsShimmer />;
 
   if (requests.length === 0)
     return (

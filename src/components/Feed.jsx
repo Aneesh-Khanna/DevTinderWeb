@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/ReduxStore/feedSlice";
 import UserCard from "./UserCard";
 import { toast } from "react-hot-toast";
+import FeedShimmer from "../utils/ShimmerUI/FeedShimmer";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Feed = () => {
     }
   }, [page]);
 
-  if (!feed) return null;
+  if (!feed) return <FeedShimmer />;
 
   if (feed.length === 0)
     return <h1 className="flex justify-center my-10">No new user found!</h1>;
