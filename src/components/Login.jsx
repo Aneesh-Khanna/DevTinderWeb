@@ -52,7 +52,7 @@ const Login = () => {
       const res = await axios.post(endpoint, payload, {
         withCredentials: true,
       });
-      const user = res.data;
+      const user = res?.data;
 
       // Store user in Redux
       dispatch(addUser(user));

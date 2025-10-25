@@ -2,7 +2,7 @@ import axios from "axios";
 import { UserRound } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL, LOGO } from "../utils/constants";
 import { removeUser } from "../utils/ReduxStore/userSlice";
 import { toast } from "react-hot-toast";
 
@@ -40,7 +40,11 @@ const Header = () => {
           to="/"
           className="btn btn-ghost normal-case text-xl flex items-center gap-2"
         >
-          <UserRound className="w-5 h-5" />
+          <img
+            src={LOGO}
+            alt="DevTinder logo"
+            className="w-8 h-8 object-contain"
+          />
           DevTinder
         </Link>
       </div>
@@ -68,7 +72,10 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections">Connections</Link>
+              </li>
+              <li>
+                <Link to="/requests">Requests</Link>
               </li>
               <li>
                 <a onClick={handleLogOut}>Logout</a>

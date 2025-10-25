@@ -16,8 +16,8 @@ const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [age, setAge] = useState(user.age);
-  const [gender, setGender] = useState(user.gender);
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about);
   const [skills, setSkills] = useState(user.skills || []);
   const [skillInput, setSkillInput] = useState("");
@@ -147,19 +147,30 @@ const EditProfile = ({ user }) => {
             </div>
 
             {/* Gender */}
+            {/* Gender */}
             <div className="relative h-20">
-              <label className={floatingLabel(gender, "Gender")}>Gender</label>
+              {/* Always-floating label */}
+              <label className="absolute left-3 top-2 text-sm text-base-content">
+                Gender
+              </label>
+
+              {/* Select box */}
               <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
                 required
-                className="w-full h-full pt-6 px-3 pb-2 bg-base-100 text-base-content border border-base-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:shadow-md hover:border-primary"
+                className="w-full h-full pt-6 px-3 pb-2 bg-base-100 text-base-content border border-base-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:shadow-md hover:border-primary appearance-none"
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
               </select>
+
+              {/* Custom arrow */}
+              <div className="pointer-events-none absolute right-3 top-[60%] transform -translate-y-1/2 text-base-content text-sm">
+                ▼
+              </div>
             </div>
 
             {/* About */}

@@ -8,6 +8,8 @@ import Body from "./components/Body";
 import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
+import Connections from "./components/Connections";
+import Requests from "./components/Requests";
 
 function App() {
   const isOnline = useOnlineStatus();
@@ -27,6 +29,14 @@ function App() {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/connections",
+          element: <Connections />,
+        },
+        {
+          path: "/requests",
+          element: <Requests />,
         },
       ],
     },

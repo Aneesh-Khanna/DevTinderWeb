@@ -1,8 +1,43 @@
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { removeUserFromFeed } from "../utils/ReduxStore/feedSlice";
+import { toast, Toaster } from "react-hot-toast"; // ✅ Toast + Toaster import
+
 const UserCard = ({ user }) => {
-  const { firstName, lastName, photoUrl, age, gender, about, skills } = user;
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { _id, firstName, lastName, photoUrl, age, gender, about, skills } =
+    user;
+  const isFeedPage = location.pathname === "/";
+
+  // Send request and show toast
+  const handleSendRequest = async (status, userId) => {
+    try {
+      await axios.post(
+        BASE_URL + "/request/send/" + status + "/" + userId,
+        {},
+        { withCredentials: true }
+      );
+      dispatch(removeUserFromFeed(userId));
+
+      // Show toast based on status
+      if (status === "interested") {
+        toast.success(`Connection Request Sent to ${firstName} ${lastName}`);
+      } else if (status === "ignored") {
+        toast(`You ignored ${firstName} ${lastName}`, { icon: "🚫" });
+      }
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <>
+      {/* 🔹 Toast container */}
+      <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
+
       {/* 🔹 Inline fade-in animation */}
       <style>
         {`
@@ -60,14 +95,22 @@ const UserCard = ({ user }) => {
           )}
 
           {/* 🔹 Buttons */}
-          <div className="flex justify-center gap-4 mt-4">
-            <button className="px-4 py-1.5 text-sm border border-red-500 text-red-400 rounded-md hover:bg-red-500 hover:text-white transition-all duration-200 ease-in-out transform hover:scale-[1.05] hover:shadow-md">
-              Ignore
-            </button>
-            <button className="px-4 py-1.5 text-sm bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-all duration-200 ease-in-out transform hover:scale-[1.05] hover:shadow-md">
-              Interested
-            </button>
-          </div>
+          {isFeedPage && (
+            <div className="flex justify-center gap-4 mt-4">
+              <button
+                className="px-4 py-1.5 text-sm border border-red-500 text-red-400 rounded-md hover:bg-red-500 hover:text-white transition-all duration-200 ease-in-out transform hover:scale-[1.05] hover:shadow-md"
+                onClick={() => handleSendRequest("ignored", _id)}
+              >
+                Ignore
+              </button>
+              <button
+                className="px-4 py-1.5 text-sm bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-all duration-200 ease-in-out transform hover:scale-[1.05] hover:shadow-md"
+                onClick={() => handleSendRequest("interested", _id)}
+              >
+                Interested
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
