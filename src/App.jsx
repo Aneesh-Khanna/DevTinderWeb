@@ -10,6 +10,7 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
   const isOnline = useOnlineStatus();
@@ -37,6 +38,10 @@ function App() {
         {
           path: "/requests",
           element: <Requests />,
+        },
+        {
+          path: "/changepassword",
+          element: <ChangePassword />,
         },
       ],
     },

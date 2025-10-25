@@ -44,8 +44,10 @@ const Requests = () => {
         withCredentials: true,
       });
 
-      dispatch(addRequests(res.data.data));
-    } catch (err) {}
+      dispatch(addRequests(res?.data?.data));
+    } catch (err) {
+      toast.error("Couldnt get the requests");
+    }
   };
 
   if (!requests) return null;

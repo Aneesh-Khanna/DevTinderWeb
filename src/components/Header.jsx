@@ -29,7 +29,8 @@ const Header = () => {
       //redirect user
       navigate("/login");
     } catch (err) {
-      // Error logic maybe redirect to error page
+      const msg = err?.response?.data || "Something went wrong";
+      toast.error(msg);
     }
   };
   return (
@@ -70,6 +71,9 @@ const Header = () => {
                 <Link to="/profile" className="justify-between">
                   Profile
                 </Link>
+              </li>
+              <li>
+                <Link to="/changepassword">Change Password</Link>
               </li>
               <li>
                 <Link to="/connections">Connections</Link>
