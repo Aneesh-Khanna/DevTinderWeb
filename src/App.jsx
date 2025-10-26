@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import ChangePassword from "./components/ChangePassword";
+import VerifyEmail from "./components/VerifyEmail";
 
 function App() {
   const isOnline = useOnlineStatus();
@@ -42,6 +43,10 @@ function App() {
         {
           path: "/changepassword",
           element: <ChangePassword />,
+        },
+        {
+          path: "/verifyemail",
+          element: <VerifyEmail />,
         },
       ],
     },

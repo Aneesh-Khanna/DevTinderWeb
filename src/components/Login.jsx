@@ -55,18 +55,27 @@ const Login = () => {
       const user = res?.data;
 
       // Store user in Redux
-      dispatch(addUser(user));
+      const userData = res?.data;
 
-      // ✅ Show success toast
+      if (!userData.isVerified) {
+        dispatch(addUser(userData)); // store unverified user
+        toast("Please verify your email first!", { icon: "🔑" });
+        navigate("/verifyemail");
+        return;
+      }
+
+      // store verified users after verifying otp
+      dispatch(addUser(userData));
       toast.success(
         `${mode === "login" ? "Logged in" : "Signed up"} successfully`
       );
-
-      //Navigate user to feed page
-      navigate("/");
+      navigate("/"); // Feed page
     } catch (err) {
       // ❌ Show error toast
-      const message = err?.response?.data || "Something went wrong. Try again.";
+      const message =
+        err?.response?.data?.message ||
+        err?.response?.data ||
+        "Something went wrong";
       setError(message);
       toast.error(message);
     } finally {
@@ -75,7 +84,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (user) navigate("/");
+    if (user?.isVerified) navigate("/"); // Only redirect if verified
   }, [user]);
 
   return (
