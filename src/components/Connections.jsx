@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/ReduxStore/connectionSlice";
 import ConnectionsShimmer from "../utils/ShimmerUI/ConnectionsShimmer";
+import { Link } from "react-router-dom";
 
 const Connections = () => {
   const connections = useSelector((store) => store.connections);
@@ -68,6 +69,12 @@ const Connections = () => {
                 )}
                 <p className="text-sm text-base-content mt-1">{about}</p>
               </div>
+
+              <Link to={"/chat/" + _id}>
+                <button className="btn btn-primary rounded-full px-5 text-white shadow-md hover:shadow-lg transition-all duration-200">
+                  Chat
+                </button>
+              </Link>
             </div>
           );
         })}

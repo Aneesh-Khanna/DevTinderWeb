@@ -12,6 +12,7 @@ import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import ChangePassword from "./components/ChangePassword";
 import VerifyEmail from "./components/VerifyEmail";
+import Chat from "./components/Chat";
 
 function App() {
   const isOnline = useOnlineStatus();
@@ -47,6 +48,10 @@ function App() {
         {
           path: "/verifyemail",
           element: <VerifyEmail />,
+        },
+        {
+          path: "/chat/:targetUserId",
+          element: <Chat />,
         },
       ],
     },
