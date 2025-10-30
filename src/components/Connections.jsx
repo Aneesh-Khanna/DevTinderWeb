@@ -70,7 +70,10 @@ const Connections = () => {
                 <p className="text-sm text-base-content mt-1">{about}</p>
               </div>
 
-              <Link to={"/chat/" + _id}>
+              <Link
+                to={`/chat/${_id}`}
+                state={{ connection }} //  pass entire user object OF THE TARGET USER
+              >
                 <button className="btn btn-primary rounded-full px-5 text-white shadow-md hover:shadow-lg transition-all duration-200">
                   Chat
                 </button>
