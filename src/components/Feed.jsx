@@ -11,6 +11,7 @@ const Feed = () => {
   const feed = useSelector((store) => store.feed) || [];
   const user = useSelector((store) => store.user);
   const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   // 🔧 Fetch feed from server
   const getFeed = async () => {
@@ -22,8 +23,10 @@ const Feed = () => {
       const newUsers = res?.data?.data || [];
       const filtered = newUsers.filter((u) => u._id !== user._id);
 
-      if (filtered.length === 0 && page === 1) {
-        toast("No new users found", { icon: "👀" });
+      if (filtered.length === 0) {
+        toast("No more users found!", { icon: "🚫" });
+        setHasMore(false); // 👈 stop further fetching
+        return; // 👈 exit early
       }
 
       dispatch(addFeed(filtered));
@@ -45,15 +48,20 @@ const Feed = () => {
 
   // 🔄 Fetch next batch automatically if feed is empty
   useEffect(() => {
-    if (feed.length === 0) {
+    if (feed.length === 0 && hasMore) {
       setPage((prev) => prev + 1);
     }
-  }, [feed]);
+  }, [feed, hasMore]);
 
   // 🔄 Fetch new page whenever `page` changes
   useEffect(() => {
     if (page > 1) getFeed();
   }, [page]);
+
+  if (!hasMore)
+    return (
+      <h1 className="flex justify-center my-10">You've seen everyone! 👋</h1>
+    );
 
   if (!feed || feed.length === 0)
     return <h1 className="flex justify-center my-10">No new user found!</h1>;
