@@ -46,8 +46,8 @@ Each service communicates securely through REST APIs and WebSockets.
 
 ### 🔐 Authentication
 
-![Login](./screenshots/login.png)
-![Signup](./screenshots/signup.png)
+![Login](./screenshots/Login.png)
+![Signup](./screenshots/Signup.png)
 ![Otp](./screenshots/OtpPage.png)
 
 ### 💞 Feed
